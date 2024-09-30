@@ -67,3 +67,8 @@ void FileView::displayOptions()
     std::cout << "3. View metadata of files\n";
 
 }
+
+void FileView::displayMetadata(std::string &data)
+{
+    std::cout << data << std::endl;
+}

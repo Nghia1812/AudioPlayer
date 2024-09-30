@@ -12,6 +12,7 @@ class FileView{
     std::string getMetadataValue();
     void displayMetadataUpdated();
     void displayOptions();
+    void displayMetadata(std::string & data);
 };
 
 #endif

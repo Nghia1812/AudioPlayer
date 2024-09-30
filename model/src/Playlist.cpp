@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
-Playlist::Playlist(std::string name)
+Playlist::Playlist(std::string name = "default")
     :name(name), currentIndex(0), isPlaying(false)
 {
 }
@@ -94,10 +94,10 @@ bool Playlist::hasFiles()
     return files.empty();
 }
 
-// void Playlist::editFileMetadata(int fileIndex, std::string &key, std::string &value) {
-//     if (fileIndex < 0 || fileIndex >= files.size()) {
-//         std::cout << "Invalid file index.\n";
-//         return;
-//     }
-//     files[fileIndex].editMetadata(key, value);
-// }
+void Playlist::editFileMetadata(int fileIndex, std::string &key, std::string &value) {
+    if (fileIndex < 0 || fileIndex >= files.size()) {
+        std::cout << "Invalid file index.\n";
+        return;
+    }
+    files[fileIndex].editMetadata(key, value);
+}

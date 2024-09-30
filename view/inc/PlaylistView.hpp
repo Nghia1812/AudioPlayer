@@ -8,6 +8,8 @@ class PlaylistView{
     void displayPL(Playlist& PL);
     void displayNowPlaying(File file);
     char getUserInput();
+    void displayUpdateOptions();
+    
 };
 
 

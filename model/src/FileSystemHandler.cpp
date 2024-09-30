@@ -33,6 +33,6 @@ std::string FileSystemHandler::getFileMetadata(int index)
         File file(list[index]);
         return file.getMetadata();
     } else {
-        std::cout << "Invalid file index.\n";
+        return "Invalid file index.\n";
     }
 }

@@ -1,5 +1,5 @@
-#ifndef CLICONTROLLER_H
-#define CLICONTROLLER_H
+#ifndef FILECONTROLLER_H
+#define FILECONTROLLER_H
 
 #include "FileSystemHandler.hpp"
 #include "FileView.hpp"
@@ -18,7 +18,7 @@ class FileController{
     void editMetadata();
     void FileControlMenu();
 
-    void displayFileMetadata(int index);
+    void displayFileMetadata();
 };
 
 #endif

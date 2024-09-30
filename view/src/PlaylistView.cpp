@@ -27,3 +27,14 @@ char PlaylistView::getUserInput()
     std::cin >> input;
     return input;
 }
+
+void PlaylistView::displayUpdateOptions()
+{
+    std::cout << "--Update File Menu--\n";
+    std::cout << "1. Add files\n";
+    std::cout << "2. List files\n";
+    std::cout << "5. Edit metadata of files\n";
+    std::cout << "6. View metadata of files\n";
+
+}
+

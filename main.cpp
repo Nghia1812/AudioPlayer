@@ -1,7 +1,16 @@
 #include "FileController.hpp"
 #include "FileView.hpp"
+
+
 #include "PlaylistController.hpp"
 #include "PlaylistView.hpp"
+
+
+#include "PlaylistManagerControl.hpp"
+#include "PlaylistManagerView.hpp"
+#include "PlaylistManager.hpp"
+
+
 #include <iostream>
 #include <string>
 
@@ -12,7 +21,11 @@ int main() {
 
     // PlaylistView playlistView;
     // PlaylistController playlistController;
-    
+
+    PlaylistManagerView plManagerView;
+    PlaylistManager plManagerModel;
+    PlaylistManagerControl plManagerControl(plManagerView, plManagerModel);
+
 
     int command;
 
@@ -20,10 +33,8 @@ int main() {
     while (true) {
         std::cout << "\nEnter a command:\n";
         std::cout << "1 - System file menu\n";
-        std::cout << "2 - Playlist menu\n";
-        std::cout << "3 - View a playlist\n";
-        std::cout << "4 - Play a playlist\n";
-        std::cout << "5 - Exit\n";
+        std::cout << "2 - Media menu\n";
+        std::cout << "3 - Exit\n";
         std::cout << ">> ";
         std::cin >> command;
         std::cin.ignore();
@@ -32,9 +43,12 @@ int main() {
         case 1:
             fileController.FileControlMenu();
             break;
-        case 5:
-            std::cout << "Exit";
+        case 2:
+            plManagerControl.plManagerMenu();
             break;
+        case 3:
+            std::cout << "Exit";
+            return 1;
         default:
             break;
         }

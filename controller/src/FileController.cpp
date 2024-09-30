@@ -52,8 +52,10 @@ void FileController::FileControlMenu()
         break;
     case '2':
         editMetadata();
+        break;
     case '3':
         displayFileMetadata();
+        break;
     default:
         break;
     }
@@ -62,5 +64,6 @@ void FileController::FileControlMenu()
 void FileController::displayFileMetadata()
 {
     int fileIndex = view.getFileSelection();
-    fileSystemControl.getFileMetadata(fileIndex);
+    std::string metadata = fileSystemControl.getFileMetadata(fileIndex);
+    view.displayMetadata(metadata);
 }
