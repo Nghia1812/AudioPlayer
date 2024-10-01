@@ -2,17 +2,19 @@
 
 void PlaylistManagerView::displayOptions()
 {
-    std::cout << "Media menu\n";
+    std::cout << "Media player menu\n";
     std::cout << "1. Play a playlist\n";
     std::cout << "2. Create a playlist/ Load existing playlist\n";
     std::cout << "3. Delete a playlist\n";
     std::cout << "4. List all playlists\n";
     std::cout << "5. Update a playlist\n";
+    std::cout << "6. Exit media player menu\n";
 
 }
 
 void PlaylistManagerView::displayPL(std::string name)
 {
+    std::cout << "\033[2J\033[1;1H";
     std::cout << "List of all playlists:\n";
     std::cout << name;
 }
@@ -24,10 +26,12 @@ void PlaylistManagerView::displayUpdateOptions()
     std::cout << "2. Delete file\n";
     std::cout << "3. List file\n";
     std::cout << "4. Edit file metadata\n";
+    std::cout << "5. Exit update playlist menu\n";
 }
 
 void PlaylistManagerView::displayPlayerOptions()
 {
+    std::cout << "\033[2J\033[1;1H";
     std::cout << "Audio player menu:\n";
     std::cout << "1. Play song\n";
     std::cout << "2. Pause song\n";
@@ -35,7 +39,7 @@ void PlaylistManagerView::displayPlayerOptions()
     std::cout << "4. Previous song\n";
     std::cout << "5. Change volume\n";
     std::cout << "6. Resume song\n";
-
+    std::cout << "7. Exit audio player menu\n";
 }
 
 char PlaylistManagerView::getUserInput() {
@@ -89,3 +93,11 @@ std::string PlaylistManagerView::getFilePath()
     return path;
 }
 
+int PlaylistManagerView::getVolumeValue()
+{
+    int value;
+    std::cout << "Enter the new value [0-100]: ";
+    std::cin >> value;
+    std::cin.ignore();
+    return value;
+}

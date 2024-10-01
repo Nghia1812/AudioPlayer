@@ -18,6 +18,9 @@ class PlaylistManagerView {
     std::string getMetadataKey();
     std::string getMetadataValue();
     std::string getFilePath();
+    int getVolumeValue();
+
+    void clearScreen(){std::cout << "\033[2J\033[1;1H";}
 
 };
 

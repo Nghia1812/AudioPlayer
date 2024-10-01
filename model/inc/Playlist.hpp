@@ -24,7 +24,7 @@ class Playlist {
     void playPL();
     void pausePL();
     void resumePL();
-
+    void loadPL();
 
     void editFileMetadata(int fileIndex, std::string &key, std::string &value);
 
@@ -32,8 +32,16 @@ class Playlist {
     std::vector <File> getFiles();
     File getCurrentFile();
     bool hasFiles();
-};
 
+    static Playlist* activePL;
+    static void musicFinishedCallback() {
+        activePL->playNext();
+    }
+    void playNext(){
+        currentIndex = (currentIndex + 1) % files.size();
+        files[currentIndex].play();
+    }
+};
 
 
 #endif

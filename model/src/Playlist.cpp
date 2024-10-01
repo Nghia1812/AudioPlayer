@@ -2,23 +2,12 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
+Playlist* Playlist::activePL = nullptr;
+
 Playlist::Playlist(std::string name)
     :name(name), currentIndex(0), isPlaying(false)
 {
-    //Load existing files from the text file
-    std::ifstream file(name + ".txt");
-    if (file.is_open()) {
-        std::string line;
-        while (std::getline(file, line)) {
-            if (line != "" && line.substr(0, 9) != "Playlist:") {
-                files.emplace_back(line);
-            }
-        }
-        file.close();
-    }
 }
-
-
 
 void Playlist::addFile(File &file)
 {
@@ -49,9 +38,6 @@ void Playlist::previousFile()
     }
 }
 
-
-
-
 void Playlist::deleteFile(File& file)
 {
     auto it = std::find_if(files.begin(), files.end(), [&](File& f) {
@@ -78,6 +64,7 @@ void Playlist::playPL()
         SDL_Quit();
         throw std::runtime_error("SDL can't init: "+ std::string(Mix_GetError()));
     }
+    Mix_HookMusicFinished(musicFinishedCallback);
     isPlaying = true;
     files[currentIndex].play();
 }
@@ -92,6 +79,21 @@ void Playlist::resumePL()
 {
     files[currentIndex].resume();
     isPlaying = true;
+}
+
+void Playlist::loadPL()
+{
+    //Load existing files from the text file
+    std::ifstream file(name + ".txt");
+    if (file.is_open()) {
+        std::string line;
+        while (std::getline(file, line)) {
+            if (line != "" && line.substr(0, 9) != "Playlist:") {
+                files.emplace_back(line);
+            }
+        }
+        file.close();
+    }
 }
 
 std::string Playlist::getName()

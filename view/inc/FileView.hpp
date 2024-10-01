@@ -13,6 +13,8 @@ class FileView{
     void displayMetadataUpdated();
     void displayOptions();
     void displayMetadata(std::string & data);
+
+    void clearScreen(){std::cout << "\033[2J\033[1;1H";}
 };
 
 #endif

@@ -95,8 +95,7 @@ void File::play()
         SDL_Quit();
         return ;
     }
-
-    if(Mix_PlayMusic(music, -1) == -1){
+    if(Mix_PlayMusic(music, 1) == -1){
         std::cout << "Can't play " << Mix_GetError() << std::endl;
     }
 }

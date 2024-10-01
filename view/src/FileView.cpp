@@ -65,6 +65,7 @@ void FileView::displayOptions()
     std::cout << "1. View files\n";
     std::cout << "2. Edit metadata of files\n";
     std::cout << "3. View metadata of files\n";
+    std::cout << "4. Exit system file menu\n";
 
 }
 

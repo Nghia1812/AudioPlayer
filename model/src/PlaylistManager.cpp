@@ -1,16 +1,18 @@
 #include "PlaylistManager.hpp"
 #include <thread>
+#include <SDL2/SDL_mixer.h>
 void PlaylistManager::createPL(std::string name)
 {
     Playlist pl(name);
-    list.push_back(pl);
-
-
-    std::ofstream file(name+ ".txt");
+    std::fstream file(name + ".txt", std::ios::app|std::ios::ate);
     if(file.is_open()) {
-        file << "Playlist: " << name << "\n";
-        file.close();
+        if(file.tellg() == 0){
+            file << "Playlist: " << name << "\n";
+            file.close();
+        }
     }
+    pl.loadPL();
+    list.push_back(pl);
 }
 
 void PlaylistManager::deletePL(std::string& name)
@@ -40,20 +42,22 @@ std::string PlaylistManager::listPL()
     return plists;
 }
 
-
-void PlaylistManager::changeVolume()
+void PlaylistManager::changeVolume(int value)
 {
-
+    value = (128 * value)/100;
+    Mix_VolumeMusic(value);
 }
+
 
 void PlaylistManager::playPL(std::string& name)
 {
     for(auto& pl : list){
         if(pl.getName() == name){
             // Start a new thread to play the playlist
-            std::thread playThread(&Playlist::playPL, &pl);
-            
-            playThread.detach();
+            // std::thread playThread(&Playlist::playPL, &pl);
+            // playThread.detach();
+            Playlist::activePL = &pl;
+            Playlist::activePL->playPL();
         }
     } 
 }
@@ -94,6 +98,8 @@ void PlaylistManager::resumePL(std::string& name)
     }
 }
 
+
+
 Playlist& PlaylistManager::getPL(std::string name)
 {
     for(auto& p : list){
@@ -127,7 +133,7 @@ void PlaylistManager::deleteFile(std::string name, int fileIndex)
 
     // If playlist is found
     if (!playlist.getName().empty()) {
-        if (fileIndex >= 0 && fileIndex < playlist.getFiles().size()) {
+        if (fileIndex >= 0 && fileIndex < (int)playlist.getFiles().size()) {
             playlist.deleteFile(playlist.getFiles()[fileIndex]);
             
             // Rewrite the playlist's text file without the deleted file
@@ -176,7 +182,7 @@ void PlaylistManager::editMetadata(std::string name, int fileIndex, std::string 
 
     // If playlist is found
     if (!playlist.getName().empty()) {
-        if (fileIndex >= 0 && fileIndex < playlist.getFiles().size()) {
+        if (fileIndex >= 0 && fileIndex < (int)playlist.getFiles().size()) {
             playlist.editFileMetadata(fileIndex, key, value);
             std::cout << "Metadata updated.\n";
         } else {

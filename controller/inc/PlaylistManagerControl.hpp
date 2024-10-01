@@ -2,7 +2,7 @@
 #define PLAYLISTMANAGERCONTROL_H
 #include "PlaylistManagerView.hpp"
 #include "PlaylistManager.hpp"
-#include "Playlist.hpp"
+
 
 class PlaylistManagerControl{
     private:
@@ -18,6 +18,7 @@ class PlaylistManagerControl{
     void updatePL();
     void listPL();
     void plManagerMenu();
+    //void loadPL();
 
 
 

@@ -1,1 +1,3 @@
 Playlist: Nghia
+./test/1.mp3
+./test/2.mp3

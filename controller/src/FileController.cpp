@@ -43,21 +43,28 @@ void FileController::editMetadata()
 
 void FileController::FileControlMenu()
 {
-    view.displayOptions();
-    char choice = view.getUserInput();
-    switch (choice)
-    {
-    case '1':
-        listFile();
-        break;
-    case '2':
-        editMetadata();
-        break;
-    case '3':
-        displayFileMetadata();
-        break;
-    default:
-        break;
+    while(true){
+        view.displayOptions();
+        char choice = view.getUserInput();
+        switch (choice)
+        {
+        case '1':
+            view.clearScreen();
+            listFile();
+            break;
+        case '2':
+            view.clearScreen();
+            editMetadata();
+            break;
+        case '3':
+            view.clearScreen();
+            displayFileMetadata();
+            break;
+        case '4':
+            return;
+        default:
+            break;
+        }
     }
 }
 
