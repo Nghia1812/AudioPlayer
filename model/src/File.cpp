@@ -86,25 +86,34 @@ void File::determineFileType()
 
 }
 
-/*not done*/
 void File::play()
 {
-    // Mix_Music* music = Mix_LoadMUS(filePath.c_str());
-    // if(!music){
-    //     std::cout << "Can't load music: " << Mix_GetError() << std::endl;
-    //     Mix_CloseAudio();
-    //     SDL_Quit();
-    //     return ;
-    // }
+    Mix_Music* music = Mix_LoadMUS(filePath.c_str());
+    if(!music){
+        std::cout << "Can't load music: " << Mix_GetError() << std::endl;
+        Mix_CloseAudio();
+        SDL_Quit();
+        return ;
+    }
 
-    // if(Mix_PlayMusic(music, -1) == -1){
-    //     std::cout << "Can't play " << Mix_GetError() << std::endl;
-    // }
+    if(Mix_PlayMusic(music, -1) == -1){
+        std::cout << "Can't play " << Mix_GetError() << std::endl;
+    }
 }
 
 void File::pause()
 {
+    if (Mix_PlayingMusic()) {
+        Mix_PauseMusic();
+        std::cout << "Audio paused." << std::endl;
+    }
+}
 
+void File::resume() {
+    if (Mix_PausedMusic()) {
+        Mix_ResumeMusic();
+        std::cout << "Audio resumed." << std::endl;
+    }
 }
 /**********/
 

@@ -12,7 +12,11 @@ void FileSystemHandler::scanFolder()
     for(auto entry : std::filesystem::recursive_directory_iterator(path)){
         if(entry.is_regular_file()){
             std::string fPath = entry.path().string();
-            list.push_back(fPath);
+            size_t dotPos = fPath.find_last_of('.');
+            if(dotPos != std::string::npos){
+                std::string extension = fPath.substr(dotPos);
+                if(extension == ".mp3" || extension == ".mp4") list.push_back(fPath);
+            }    
         }
     }
 }

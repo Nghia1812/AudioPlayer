@@ -1,6 +1,7 @@
 #ifndef PLAYLIST_H
 #define PLAYLIST_H
-
+#include <fstream>
+#include <iostream>
 #include "File.hpp"
 
 class Playlist {
@@ -22,6 +23,8 @@ class Playlist {
     void deleteFile(File& file);
     void playPL();
     void pausePL();
+    void resumePL();
+
 
     void editFileMetadata(int fileIndex, std::string &key, std::string &value);
 

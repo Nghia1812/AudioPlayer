@@ -36,6 +36,7 @@ class File{
     //audio options
     void play();
     void pause();
+    void resume();
 
     
 ;

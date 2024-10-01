@@ -19,9 +19,7 @@ SRCS = 	$(MODEL_SRC)/File.cpp \
 		$(MODEL_SRC)/Playlist.cpp \
 		$(MODEL_SRC)/PlaylistManager.cpp \
 		$(CONTROLLER_SRC)/FileController.cpp \
-		$(CONTROLLER_SRC)/PlaylistController.cpp \
 		$(CONTROLLER_SRC)/PlaylistManagerControl.cpp \
-		$(VIEW_SRC)/PlaylistView.cpp \
 		$(VIEW_SRC)/PlaylistManagerView.cpp \
 		$(VIEW_SRC)/FileView.cpp \
        	main.cpp
@@ -31,8 +29,6 @@ OBJS = 	$(OBJ_DIR)/File.o \
 		$(OBJ_DIR)/Playlist.o \
        	$(OBJ_DIR)/FileSystemHandler.o \
        	$(OBJ_DIR)/FileController.o \
-	   	$(OBJ_DIR)/PlaylistController.o \
-		$(OBJ_DIR)/PlaylistView.o \
 		$(OBJ_DIR)/PlaylistManagerView.o \
 		$(OBJ_DIR)/PlaylistManager.o \
 		$(OBJ_DIR)/PlaylistManagerControl.o \

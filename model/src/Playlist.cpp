@@ -2,10 +2,23 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
-Playlist::Playlist(std::string name = "default")
+Playlist::Playlist(std::string name)
     :name(name), currentIndex(0), isPlaying(false)
 {
+    //Load existing files from the text file
+    std::ifstream file(name + ".txt");
+    if (file.is_open()) {
+        std::string line;
+        while (std::getline(file, line)) {
+            if (line != "" && line.substr(0, 9) != "Playlist:") {
+                files.emplace_back(line);
+            }
+        }
+        file.close();
+    }
 }
+
+
 
 void Playlist::addFile(File &file)
 {
@@ -35,6 +48,7 @@ void Playlist::previousFile()
         std::cout << "No more files in the playlist." << std::endl;
     }
 }
+
 
 
 
@@ -72,6 +86,12 @@ void Playlist::pausePL()
 {
     files[currentIndex].pause();
     isPlaying = false;
+}
+
+void Playlist::resumePL()
+{
+    files[currentIndex].resume();
+    isPlaying = true;
 }
 
 std::string Playlist::getName()

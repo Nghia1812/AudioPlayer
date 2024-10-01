@@ -9,6 +9,7 @@ class PlaylistManagerControl{
     PlaylistManagerView view;
     PlaylistManager model;
 
+
     public:
     PlaylistManagerControl(PlaylistManagerView view, PlaylistManager model);
     void createPL();
@@ -17,6 +18,8 @@ class PlaylistManagerControl{
     void updatePL();
     void listPL();
     void plManagerMenu();
+
+
 
 
 

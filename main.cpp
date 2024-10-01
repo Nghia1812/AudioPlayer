@@ -18,10 +18,6 @@ int main() {
     FileView fileView;
     FileController fileController(fileView);
 
-
-    // PlaylistView playlistView;
-    // PlaylistController playlistController;
-
     PlaylistManagerView plManagerView;
     PlaylistManager plManagerModel;
     PlaylistManagerControl plManagerControl(plManagerView, plManagerModel);
