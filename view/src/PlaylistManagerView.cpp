@@ -2,6 +2,7 @@
 
 void PlaylistManagerView::displayOptions()
 {
+    //std::cout << "\033[2J\033[1;1H";
     std::cout << "Media player menu\n";
     std::cout << "1. Play a playlist\n";
     std::cout << "2. Create a playlist/ Load existing playlist\n";
@@ -31,7 +32,7 @@ void PlaylistManagerView::displayUpdateOptions()
 
 void PlaylistManagerView::displayPlayerOptions()
 {
-    std::cout << "\033[2J\033[1;1H";
+    //std::cout << "\033[2J\033[1;1H";
     std::cout << "Audio player menu:\n";
     std::cout << "1. Play song\n";
     std::cout << "2. Pause song\n";
@@ -39,7 +40,8 @@ void PlaylistManagerView::displayPlayerOptions()
     std::cout << "4. Previous song\n";
     std::cout << "5. Change volume\n";
     std::cout << "6. Resume song\n";
-    std::cout << "7. Exit audio player menu\n";
+    std::cout << "7. View duration\n";
+    std::cout << "8. Exit audio player menu\n";
 }
 
 char PlaylistManagerView::getUserInput() {
@@ -101,3 +103,5 @@ int PlaylistManagerView::getVolumeValue()
     std::cin.ignore();
     return value;
 }
+
+

@@ -122,12 +122,18 @@ std::string File::getMetadata()
     return "Title: " + title + "\nArtist: " + artist + "\n";
 }
 
-std::string File::displayDuration(int seconds)
+int File::getDuration()
 {
-    int minutes = seconds / 60;
-    int remainingSeconds = seconds % 60;
-    return std::to_string(minutes) + ":" + (remainingSeconds < 10 ? "0" : "") + std::to_string(remainingSeconds);
+    TagLib::FileRef fileRef(filePath.c_str());
+    if (!fileRef.isNull() && fileRef.audioProperties()) {
+        TagLib::AudioProperties *properties = fileRef.audioProperties();
+        int duration = properties->length();
+        return duration;
+    }
 }
+
+
+
 
 
 

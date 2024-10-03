@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 
 class PlaylistManagerView {
     public:
@@ -21,8 +22,13 @@ class PlaylistManagerView {
     int getVolumeValue();
 
     void clearScreen(){std::cout << "\033[2J\033[1;1H";}
+    void viewDuration(int elapsed, int total){
+        std::cout << elapsed << "s / " << total << "s\n";
+        std::cout.flush();  // Ensure output is written immediately    
+    }
 
 };
+
 
 
 

@@ -2,13 +2,18 @@
 #define PLAYLISTMANAGERCONTROL_H
 #include "PlaylistManagerView.hpp"
 #include "PlaylistManager.hpp"
-
+#include <thread>
 
 class PlaylistManagerControl{
     private:
     PlaylistManagerView view;
     PlaylistManager model;
 
+
+    std::thread durationThread;
+    bool isPlaying;
+    int totalDuration;
+    int elapsed;
 
     public:
     PlaylistManagerControl(PlaylistManagerView view, PlaylistManager model);
@@ -18,9 +23,8 @@ class PlaylistManagerControl{
     void updatePL();
     void listPL();
     void plManagerMenu();
-    //void loadPL();
 
-
+    void updateDuration();
 
 
 

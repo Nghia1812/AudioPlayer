@@ -20,6 +20,7 @@ void FileController::listFile()
                 currentPage++;
             }
         } else if (choice == 'Q' || choice == 'q') {
+            std::cout << "\033[2J\033[1;1H";
             break;
         } else {
             std::cout << "Invalid choice. Please try again.\n";
@@ -73,4 +74,8 @@ void FileController::displayFileMetadata()
     int fileIndex = view.getFileSelection();
     std::string metadata = fileSystemControl.getFileMetadata(fileIndex);
     view.displayMetadata(metadata);
+    std::cout << "Press any key to quit: ";
+    char c;
+    std::cin >> c;
+    view.clearScreen();
 }

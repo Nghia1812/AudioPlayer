@@ -25,6 +25,7 @@ class Playlist {
     void pausePL();
     void resumePL();
     void loadPL();
+    int getDuration();
 
     void editFileMetadata(int fileIndex, std::string &key, std::string &value);
 

@@ -4,7 +4,6 @@ void FileView::displayFiles(const std::vector<std::string> &files, int currentPa
 {
     int startIdx = currentPage * 25;
     int endIdx = std::min(startIdx + 25, (int)files.size());
-
     std::cout << "Files (Page " << (currentPage + 1) << " of " << totalPages << ")\n";
     std::cout << "------------------------------------------\n";
 
@@ -61,6 +60,7 @@ void FileView::displayMetadataUpdated()
 
 void FileView::displayOptions()
 {
+    std::cout << "\033[2J\033[1;1H";
     std::cout << "--System File Menu--\n";
     std::cout << "1. View files\n";
     std::cout << "2. Edit metadata of files\n";

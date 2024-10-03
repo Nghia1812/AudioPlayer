@@ -18,7 +18,7 @@ class File{
     int duration;
 
     //helper func
-    std::string displayDuration(int seconds);
+    //std::string displayDuration(int seconds);
     std::string getFileExtension();
     void determineFileType();
 
@@ -32,6 +32,7 @@ class File{
     
     //
     std::string getMetadata();
+    int getDuration();
 
     //audio options
     void play();

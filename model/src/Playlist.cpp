@@ -96,6 +96,11 @@ void Playlist::loadPL()
     }
 }
 
+int Playlist::getDuration()
+{
+    return files[currentIndex].getDuration();
+}
+
 std::string Playlist::getName()
 {
     return name;

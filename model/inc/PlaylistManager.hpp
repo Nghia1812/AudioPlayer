@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include "Playlist.hpp"
+#include <thread>
 
 class PlaylistManager{
     private:

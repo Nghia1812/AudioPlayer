@@ -53,9 +53,6 @@ void PlaylistManager::playPL(std::string& name)
 {
     for(auto& pl : list){
         if(pl.getName() == name){
-            // Start a new thread to play the playlist
-            // std::thread playThread(&Playlist::playPL, &pl);
-            // playThread.detach();
             Playlist::activePL = &pl;
             Playlist::activePL->playPL();
         }

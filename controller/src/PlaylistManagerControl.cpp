@@ -1,8 +1,11 @@
 #include "PlaylistManagerControl.hpp"
+#include <cstdlib>
 
 PlaylistManagerControl::PlaylistManagerControl(PlaylistManagerView view, PlaylistManager model)
-    : view(view), model(model)
+    : view(view), model(model), isPlaying(false)
 {
+    totalDuration = 0;
+    elapsed = 0;
 }
 
 void PlaylistManagerControl::createPL()
@@ -22,6 +25,10 @@ void PlaylistManagerControl::deletePL()
 void PlaylistManagerControl::listPL()
 {
     view.displayPL(model.listPL());
+    std::cout << "Press any key to quit: ";
+    char c;
+    std::cin >> c;
+    view.clearScreen();
 }
 
 
@@ -37,6 +44,7 @@ void PlaylistManagerControl::plManagerMenu()
         case '1':
             view.clearScreen();
             playPL();
+            
             break;
         case '2':
             view.clearScreen();
@@ -59,8 +67,31 @@ void PlaylistManagerControl::plManagerMenu()
         default:
             break;
         }
+        
     }
     
+}
+
+void PlaylistManagerControl::updateDuration()
+{
+    while (true) {
+    if (isPlaying) {
+        // Get duration of playing file
+        totalDuration = Playlist::activePL->getDuration();
+        elapsed = 0;
+        // Update duration
+        while (elapsed <= totalDuration && isPlaying) {
+            std::ofstream outputFile("duration.txt");
+            if (outputFile.is_open()) {
+                outputFile << elapsed << ": " << totalDuration;
+                outputFile.flush();
+                outputFile.close();
+            }
+            std::this_thread::sleep_for(std::chrono::seconds(1)); // Update every second
+            elapsed++;
+        }
+    }
+}
 }
 
 void PlaylistManagerControl::updatePL()
@@ -91,6 +122,10 @@ void PlaylistManagerControl::updatePL()
             //list file
             view.clearScreen();
             model.listFile(name);
+            std::cout << "Press any key to quit: ";
+            char c;
+            std::cin >> c;
+            view.clearScreen();
             break;
         }
             
@@ -105,6 +140,7 @@ void PlaylistManagerControl::updatePL()
         }
 
         case '5':{
+            view.clearScreen();
             return;
         }
             
@@ -127,6 +163,12 @@ void PlaylistManagerControl::playPL()
             //play file
             view.clearScreen();
             model.playPL(name);
+            isPlaying = true;
+
+            //attach thread
+            durationThread = std::thread(&PlaylistManagerControl::updateDuration, this);
+            durationThread.detach();
+
             break;
         }
             
@@ -134,6 +176,7 @@ void PlaylistManagerControl::playPL()
             //pause file
             view.clearScreen();
             model.pausePL(name);
+            isPlaying = false;
             break;
         }
             
@@ -141,6 +184,7 @@ void PlaylistManagerControl::playPL()
             //next file
             view.clearScreen();
             model.nextPL(name);
+            isPlaying = true;
             break;
         }
             
@@ -148,6 +192,7 @@ void PlaylistManagerControl::playPL()
             //previous file
             view.clearScreen();
             model.previousPL(name);
+            isPlaying = true;
             break;
         }
 
@@ -162,12 +207,19 @@ void PlaylistManagerControl::playPL()
         case '6':{
             view.clearScreen();
             model.resumePL(name);
+            
             break;
         }
 
         case '7':{
-            return;
+            view.clearScreen();
+            std::cout << Playlist::activePL->getCurrentFile().getFilePath() << ": ";
+            view.viewDuration(elapsed, totalDuration);
+            break;
         }
+
+        case '8': 
+            return;
             
         default:
             break;
